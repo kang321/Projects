@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Fake News📰 Detection System</title>
+<style>
+    h2{
+        text-align: center;
+    }
+</style>
+</head>
+
+<body>
+ <div id="login" style="width: 80%; margin: auto">
+ {% include 'header.html' %}
+	<h1>News Authenticity</h1>
+
+    <form action="{{ url_for('predict')}}" method="POST">
+    	<textarea  name="message" rows="6" cols="50" required="required" style="font-size: 18pt"></textarea>
+		<br> </br>
+        <button type="submit" class="btn btn-primary btn-block btn-large" >Predict</button>
+
+        	<div class="results">
+
+	{% if prediction == ['FAKE']%}
+	<h2 style="color:red;">Looks like a Fake News📰 </h2>
+	{% elif prediction == ['REAL']%}
+				<h2 style="color:green;"><b>Looks Real News📰</b></h2>
+	{% endif %}
+    {% if sentiment == -1 %}
+	<h2 style="color:red;">News is Negative in nature </h2>
+	{% elif sentiment == 1 %}
+				<h2 style="color:#008006;"><b>News is Positive in nature</b></h2>
+    {% elif sentiment == 0 %}
+				<h2 style="color:#6f6868;"><b>News is Neutral</b></h2>
+	{% endif %}
+
+	</div>
+
+    </form>
+
+</div>
